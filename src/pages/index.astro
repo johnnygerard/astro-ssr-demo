@@ -19,12 +19,17 @@ const cf = Astro.request.cf;
 <Layout>
   <main class="mx-auto max-w-4xl px-6 py-10">
     <header class="space-y-2">
-      <h1 class="text-2xl font-semibold">Astro SSR request inspector</h1>
-      <p class="text-sm opacity-80">
-        This page sets <code class="font-mono"
+      <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl">
+        Astro SSR request inspector
+      </h1>
+      <p class="text-sm text-neutral-300">
+        This page sets
+        <code class="rounded bg-white/5 px-1 py-0.5 font-mono text-neutral-100"
           >export const prerender = false</code
         > and renders
-        <code class="font-mono">Astro.request</code> on the server.
+        <code class="rounded bg-white/5 px-1 py-0.5 font-mono text-neutral-100"
+          >Astro.request</code
+        > on the server.
       </p>
     </header>
 
@@ -56,7 +61,7 @@ const cf = Astro.request.cf;
       cf && (
         <section class="mt-8 space-y-3">
           <h2 class="text-lg font-semibold">Cloudflare request.cf</h2>
-          <pre class="overflow-auto rounded border border-black/10 bg-black/5 p-4 text-xs leading-relaxed">
+          <pre class="overflow-auto rounded border border-white/10 bg-white/5 p-4 text-xs leading-relaxed text-neutral-100">
             {JSON.stringify(cf, null, 2)}
           </pre>
         </section>
@@ -65,9 +70,9 @@ const cf = Astro.request.cf;
 
     <section class="mt-8 space-y-3">
       <h2 class="text-lg font-semibold">All request headers</h2>
-      <div class="overflow-auto rounded border border-black/10">
+      <div class="overflow-auto rounded border border-white/10">
         <table class="w-full text-left text-sm">
-          <thead class="bg-black/5">
+          <thead class="bg-white/5">
             <tr>
               <th class="px-3 py-2 font-semibold">Header</th>
               <th class="px-3 py-2 font-semibold">Value</th>
@@ -76,7 +81,7 @@ const cf = Astro.request.cf;
           <tbody>
             {
               sortedHeaders.map(([key, value]) => (
-                <tr class="border-t border-black/10">
+                <tr class="border-t border-white/10">
                   <td class="px-3 py-2 align-top font-mono">{key}</td>
                   <td class="px-3 py-2 font-mono break-all">{value}</td>
                 </tr>
