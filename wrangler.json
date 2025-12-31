@@ -5,11 +5,7 @@
     "directory": "dist"
   },
   "compatibility_date": "2025-12-31",
-  "compatibility_flags": [
-    "global_fetch_strictly_public",
-    "no_nodejs_compat_v2",
-    "nodejs_compat"
-  ],
+  "compatibility_flags": ["global_fetch_strictly_public", "nodejs_compat"],
   "main": "dist/_worker.js/index.js",
   "name": "astro-ssr-demo",
   "observability": {
