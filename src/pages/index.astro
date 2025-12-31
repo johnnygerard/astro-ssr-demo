@@ -12,8 +12,6 @@ const userAgent = headers.get("user-agent");
 const acceptLanguage = headers.get("accept-language");
 const cookieHeader = headers.get("cookie");
 const cfConnectingIp = headers.get("cf-connecting-ip");
-
-const cf = Astro.request.cf;
 ---
 
 <Layout>
@@ -56,17 +54,6 @@ const cf = Astro.request.cf;
         }
       </dl>
     </section>
-
-    {
-      cf && (
-        <section class="mt-8 space-y-3">
-          <h2 class="text-lg font-semibold">Cloudflare request.cf</h2>
-          <pre class="overflow-auto rounded border border-white/10 bg-white/5 p-4 text-xs leading-relaxed text-neutral-100">
-            {JSON.stringify(cf, null, 2)}
-          </pre>
-        </section>
-      )
-    }
 
     <section class="mt-8 space-y-3">
       <h2 class="text-lg font-semibold">All request headers</h2>
