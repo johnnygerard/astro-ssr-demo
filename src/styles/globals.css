@@ -1,6 +1,19 @@
 @import "tailwindcss";
 
 @layer base {
+  html {
+    color-scheme: dark;
+  }
+
+  body {
+    @apply bg-neutral-950 text-neutral-100;
+  }
+
+  a {
+    @apply underline decoration-white/30 underline-offset-4;
+    @apply hover:decoration-white/60;
+  }
+
   button:enabled,
   [role="button"]:enabled {
     cursor: pointer;
@@ -32,4 +45,6 @@
 /* `@theme inline` is required when referencing CSS custom properties */
 /* @see https://tailwindcss.com/docs/theme#referencing-other-variables */
 @theme inline {
+  --font-sans: "Geist", sans-serif;
+  --font-mono: "Geist Mono", monospace;
 }

@@ -1,8 +1,82 @@
 ---
-import Main from "~/components/Main.astro";
 import Layout from "~/layouts/Layout.astro";
+
+export const prerender = false;
+
+const headers = Astro.request.headers;
+const sortedHeaders = Array.from(headers.entries()).sort(([a], [b]) =>
+  a.localeCompare(b),
+);
+
+const userAgent = headers.get("user-agent");
+const acceptLanguage = headers.get("accept-language");
+const cookieHeader = headers.get("cookie");
+const cfConnectingIp = headers.get("cf-connecting-ip");
 ---
 
 <Layout>
-  <Main />
+  <main class="mx-auto max-w-4xl px-6 py-10">
+    <header class="space-y-2">
+      <h1 class="text-3xl font-semibold tracking-tight sm:text-4xl">
+        Astro SSR request inspector
+      </h1>
+      <p class="text-sm text-neutral-300">
+        This page sets
+        <code class="rounded bg-white/5 px-1 py-0.5 font-mono text-neutral-100"
+          >export const prerender = false</code
+        > and renders
+        <code class="rounded bg-white/5 px-1 py-0.5 font-mono text-neutral-100"
+          >Astro.request</code
+        > on the server.
+      </p>
+    </header>
+
+    <section class="mt-8 space-y-3">
+      <h2 class="text-lg font-semibold">Request summary</h2>
+      <dl class="grid gap-2 text-sm sm:grid-cols-[10rem_1fr]">
+        {
+          Object.entries({
+            "Server time": new Date().toISOString(),
+            Method: Astro.request.method,
+            URL: Astro.url.toString(),
+            Path: Astro.url.pathname,
+            Query: Astro.url.search || "(none)",
+            "User-Agent": userAgent,
+            "Accept-Language": acceptLanguage,
+            Cookie: cookieHeader,
+            "Client IP": cfConnectingIp,
+          }).map(([name, value]) => (
+            <>
+              <dt class="opacity-70">{name}</dt>
+              <dd class="font-mono break-all">{value ?? "(none)"}</dd>
+            </>
+          ))
+        }
+      </dl>
+    </section>
+
+    <section class="mt-8 space-y-3">
+      <h2 class="text-lg font-semibold">All request headers</h2>
+      <div class="overflow-auto rounded border border-white/10">
+        <table class="w-full text-left text-sm">
+          <thead class="bg-white/5">
+            <tr>
+              <th class="px-3 py-2 font-semibold">Header</th>
+              <th class="px-3 py-2 font-semibold">Value</th>
+            </tr>
+          </thead>
+          <tbody>
+            {
+              sortedHeaders.map(([key, value]) => (
+                <tr class="border-t border-white/10">
+                  <td class="px-3 py-2 align-top font-mono">{key}</td>
+                  <td class="px-3 py-2 font-mono break-all">{value}</td>
+                </tr>
+              ))
+            }
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
 </Layout>

@@ -22,7 +22,7 @@
     "node": "24",
     "npm": "11"
   },
-  "name": "starter-astro-5",
+  "name": "astro-ssr-demo",
   "private": true,
   "scripts": {
     "astro": "astro",
